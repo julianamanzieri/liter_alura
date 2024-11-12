@@ -29,7 +29,7 @@ public class Principal {
 
     public void displayMenu() {
         var option = -1;
-        while(option !=0) {
+        while(option != 0) {
             var menu = """
                     1 - Search for book by title
                     2 - List registered books
@@ -97,8 +97,7 @@ public class Principal {
                 Book book;
 
                 if (optionalBook.isPresent()) {
-                    book = optionalBook.get();
-                    System.out.println("The book '" + book.getTitle() + "' already exists in the database.");
+                    System.out.println("The book '" + optionalBook.get().getTitle() + "' already exists in the database.");
                 } else {
                     book = new Book();
                     book.setTitle(dataBook.title());
