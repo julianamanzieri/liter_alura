@@ -78,7 +78,7 @@ public class Principal {
 
     private void searchForBookByTitle() {
         DataResults dataResults = getDataResults();
-        if (dataResults != null && dataResults.results() != null) {
+        if (dataResults != null && dataResults.results() != null && !dataResults.results().isEmpty()) {
             List<DataBook> dataBooks = dataResults.results();
 
             for (DataBook dataBook : dataBooks) {
@@ -94,12 +94,11 @@ public class Principal {
                         .collect(Collectors.toList());
 
                 Optional<Book> optionalBook = bookRepository.findByTitle(dataBook.title());
-                Book book;
 
                 if (optionalBook.isPresent()) {
-                    System.out.println("The book '" + optionalBook.get().getTitle() + "' already exists in the database.");
+                    System.out.println("The book '" + optionalBook.get().getTitle() + "' already exists in the database!");
                 } else {
-                    book = new Book();
+                    Book book = new Book();
                     book.setTitle(dataBook.title());
                     book.setLanguage(dataBook.languages().get(0));
                     book.setNumberOfDownloads(dataBook.numberOfDownloads());
@@ -119,7 +118,7 @@ public class Principal {
                 }
             }
         } else {
-            System.out.println("No results found for the given title.");
+            System.out.println("No results found for the given title!");
         }
     }
 
@@ -137,7 +136,7 @@ public class Principal {
     private void listRegisteredAuthors() {
         List<Author> authors = authorRepository.findAll();
         if (authors.isEmpty()) {
-            System.out.println("No authors registered.");
+            System.out.println("No authors registered!");
         } else {
             System.out.println("Registered authors:");
             authors.forEach(System.out::println);
@@ -168,13 +167,13 @@ public class Principal {
         languages.forEach((code, name) -> System.out.println(code + "- " + name));
         String languageCode = scanner.nextLine().toLowerCase();
         if (!languages.containsKey(languageCode)) {
-            System.out.println("Invalid language code. Please try again.");
+            System.out.println("Invalid language code. Please try again!");
             return;
         }
 
         var books = bookRepository.findByLanguages(languageCode);
         if (books.isEmpty()) {
-            System.out.println("No books found in the specified language.");
+            System.out.println("No books found in the specified language!");
         } else {
             books.forEach(System.out::println);
         }
