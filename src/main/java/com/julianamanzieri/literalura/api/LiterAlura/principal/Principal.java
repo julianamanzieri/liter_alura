@@ -61,6 +61,8 @@ public class Principal {
                     break;
                 case 0:
                     System.out.println("Leaving...");
+                    scanner.close();
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid option");
